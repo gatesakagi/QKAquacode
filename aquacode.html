@@ -83,6 +83,9 @@
 				text-align: center;
 				margin-bottom: 20px;
 			}
+			section.result{
+				padding-bottom: 5em;
+			}
 			section.result *{
 				font-size: 2.4rem;
 			}
@@ -195,7 +198,7 @@
 			</nav>
 
 			<main>
-				<form id="manualbox" onsubmit="return false" autocomplete="false">
+				<form id="manualbox" onsubmit="return false" autocomplete="off">
 					<section class="desc">
 						<h2>本表格由 Quartet Kaffe 設計，取本表格計算之濃縮液提取量，再兌純水到目標沖煮量即可得到目標TDS之沖煮用水。</h2>	
 					</section>
@@ -205,19 +208,19 @@
 						<h2>請輸入下列數值</h2>
 						<div class="form-group">
 							<label for="tds">濃縮液TDS</label>
-							<input type="tel" id="tds" name="tds" required maxlength="3">
+							<input type="tel" id="tds" name="tds" required maxlength="3" autocomplete="off">
 						</div>
 
 
 						<div class="form-group">
 							<label for="tdstarget">目標TDS</label>
-							<input type="tel" id="tdstarget" name="tdstarget" required maxlength="3">
+							<input type="tel" id="tdstarget" name="tdstarget" required maxlength="3" autocomplete="off">
 						</div>
 
 
 						<div class="form-group">
 							<label for="water">沖煮水總量</label>
-							<input type="tel" id="water" name="water" required maxlength="3">
+							<input type="tel" id="water" name="water" required maxlength="3" autocomplete="off">
 						</div>
 
 						<div class="button-group">
@@ -241,7 +244,7 @@
 					</section>
 				</form>
 
-				<form id="fixedbox" onsubmit="return false" autocomplete="false">
+				<form id="fixedbox" onsubmit="return false" autocomplete="off">
 					<section class="desc">
 						<h2>本表格由 Quartet Kaffe 設計，輸入需求水量及TDS濃縮濃度即可列出不同TDS對應的純水及濃縮液</h2>	
 					</section>
@@ -250,13 +253,13 @@
 						<h2>請輸入下列數值</h2>
 						<div class="form-group">
 							<label for="waterrequest">需求水量</label>
-							<input type="tel" id="waterrequest" name="waterrequest" required maxlength="3">
+							<input type="tel" id="waterrequest" name="waterrequest" required maxlength="3" autocomplete="off">
 						</div>
 
 
 						<div class="form-group">
 							<label for="tdscompress">濃縮液TDS</label>
-							<input type="tel" id="tdscompress" name="tdscompress" required maxlength="3">
+							<input type="tel" id="tdscompress" name="tdscompress" required maxlength="3" autocomplete="off">
 						</div>
 
 						<div class="button-group">
@@ -333,7 +336,7 @@
 
 				if (waterrequestValue > 0 && tdscompressValue > 0) {
 					let tdsfixedtable = document.getElementById('tdsfixedtable');
-					for (var i = 100; i > 10; i = i - 5) {
+					for (var i = 100; i > 0; i = i - 5) {
 						let calcResultArray = calcResult(tdscompressValue, i, waterrequestValue);
 						let tr = document.createElement('tr');
 						let tdTDS = document.createElement('td');
