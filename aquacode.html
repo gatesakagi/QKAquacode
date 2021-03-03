@@ -326,7 +326,7 @@
 
 				if (waterrequestValue > 0 && tdscompressValue > 0) {
 					let tdsfixedtable = document.getElementById('tdsfixedtable');
-					for (var i = 100; i > 10; i = i - 10) {
+					for (var i = 100; i > 10; i = i - 5) {
 						let calcResultArray = calcResult(tdscompressValue, i, waterrequestValue);
 						let tr = document.createElement('tr');
 						let tdTDS = document.createElement('td');
