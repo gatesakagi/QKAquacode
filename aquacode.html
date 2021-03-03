@@ -53,7 +53,7 @@
 				margin: 20px 0;
 			}
 			.form-group{
-				margin: 5px 0;
+				margin: 5px 0 10px 0;
 				display: flex;
 			}
 			.form-group label, p{
@@ -67,10 +67,17 @@
 				font-size: 1.8rem;
 				text-align: left;
 				-webkit-appearance: none;
-				border: none;
-				border-bottom: 1px solid #333;
+				border: 1px solid #ced4da;
+				border-radius: .25rem;
 				outline: none;
 				padding: 0 10px;
+			}
+			.form-group input:focus {
+			    color: #212529;
+			    background-color: #fff;
+			    border-color: #86b7fe;
+			    outline: 0;
+			    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
 			}
 			.userinfo{
 				text-align: center;
