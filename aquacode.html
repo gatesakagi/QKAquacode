@@ -55,6 +55,7 @@
 			.form-group{
 				margin: 5px 0 10px 0;
 				display: flex;
+				flex-wrap: wrap;
 			}
 			.form-group label, p{
 				font-size: 1.8rem;
@@ -63,7 +64,7 @@
 				padding-right: 10px;
 			}
 			.form-group input{
-				width: 100%;
+				flex: 0 0 55%;
 				font-size: 1.8rem;
 				text-align: left;
 				-webkit-appearance: none;
@@ -78,6 +79,13 @@
 			    border-color: #86b7fe;
 			    outline: 0;
 			    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+			}
+			.form-group .detail{
+				flex: 0 0 100%;
+				font-size: 1.6rem;
+				font-weight: bold;
+				color: #a70000;
+				margin-top: 0;
 			}
 			.userinfo{
 				text-align: center;
@@ -209,12 +217,14 @@
 						<div class="form-group">
 							<label for="tds">濃縮液TDS</label>
 							<input type="tel" id="tds" name="tds" required maxlength="3" autocomplete="off">
+							<p class="detail">* 已倒入Aquacode的濃縮液容量(如桶水2L)</p>
 						</div>
 
 
 						<div class="form-group">
 							<label for="tdstarget">目標TDS</label>
 							<input type="tel" id="tdstarget" name="tdstarget" required maxlength="3" autocomplete="off">
+							<p class="detail">* 你設定的沖煮用水要用多少TDS</p>
 						</div>
 
 
@@ -246,7 +256,7 @@
 
 				<form id="fixedbox" onsubmit="return false" autocomplete="off">
 					<section class="desc">
-						<h2>本表格由 Quartet Kaffe 設計，輸入需求水量及TDS濃縮濃度即可列出不同TDS對應的純水及濃縮液</h2>	
+						<h2>本表格由 Quartet Kaffe 設計，輸入需求水量及濃縮液TDS即可列出不同TDS對應的純水及濃縮液</h2>	
 					</section>
 
 					<section class="userinfo">
@@ -260,6 +270,7 @@
 						<div class="form-group">
 							<label for="tdscompress">濃縮液TDS</label>
 							<input type="tel" id="tdscompress" name="tdscompress" required maxlength="3" autocomplete="off">
+							<p class="desc">* 已倒入Aquacode的濃縮液容量(如桶水2L)</p>
 						</div>
 
 						<div class="button-group">
