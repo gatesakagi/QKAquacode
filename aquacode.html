@@ -243,13 +243,13 @@
 						<h2>請輸入下列數值</h2>
 						<div class="form-group">
 							<label for="waterrequest">需求水量</label>
-							<input type="tel" id="waterrequest" name="waterrequest"  maxlength="3">
+							<input type="tel" id="waterrequest" name="waterrequest" requred maxlength="3">
 						</div>
 
 
 						<div class="form-group">
 							<label for="tdscompress">濃縮液TDS</label>
-							<input type="tel" id="tdscompress" name="tdscompress"  maxlength="3">
+							<input type="tel" id="tdscompress" name="tdscompress" requred maxlength="3">
 						</div>
 
 						<div class="button-group">
@@ -321,26 +321,28 @@
 			}
 
 			function calcfixedResult() {
-				console.log('this');
 				let waterrequestValue = parseInt(document.getElementById('waterrequest').value); 
 				let tdscompressValue = parseInt(document.getElementById('tdscompress').value);
 
-				let tdsfixedtable = document.getElementById('tdsfixedtable');
-				for (var i = 100; i > 10; i = i - 10) {
-					let calcResultArray = calcResult(tdscompressValue, i, waterrequestValue);
-					let tr = document.createElement('tr');
-					let tdTDS = document.createElement('td');
-					tdTDS.textContent = i;
-					let tdTDSValue = document.createElement('td');
-					tdTDSValue.textContent = Math.round(calcResultArray[1], -1);
-					let tdWaterValue = document.createElement('td');
-					tdWaterValue.textContent = Math.round(calcResultArray[0], -1);
-					tr.appendChild(tdTDS);
-					tr.appendChild(tdTDSValue);
-					tr.appendChild(tdWaterValue);
-					tdsfixedtable.appendChild(tr);
+				if (waterrequestValue > 0 && tdscompressValue > 0) {
+					let tdsfixedtable = document.getElementById('tdsfixedtable');
+					for (var i = 100; i > 10; i = i - 10) {
+						let calcResultArray = calcResult(tdscompressValue, i, waterrequestValue);
+						let tr = document.createElement('tr');
+						let tdTDS = document.createElement('td');
+						tdTDS.textContent = i;
+						let tdTDSValue = document.createElement('td');
+						tdTDSValue.textContent = Math.round(calcResultArray[1], -1);
+						let tdWaterValue = document.createElement('td');
+						tdWaterValue.textContent = Math.round(calcResultArray[0], -1);
+						tr.appendChild(tdTDS);
+						tr.appendChild(tdTDSValue);
+						tr.appendChild(tdWaterValue);
+						tdsfixedtable.appendChild(tr);
+					}
+				} else {
+					alert('2個數值尚未輸入!!')			  		
 				}
-
 			}
 
 			function calcResult(tdsValue, tdstargetValue, waterValue) {
