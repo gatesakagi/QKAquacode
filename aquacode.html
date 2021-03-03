@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-Hang-TW">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		<title>Aquacode 濃縮液稀釋公式｜Quartet Kaffe 同香會</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html{
+				font-size: 62.5%;
+			}
+			body > *{
+				font-family: 'PingFang TC','Heiti TC','LantingHei TC','LiHei Pro','微軟正黑體','Noto Sans TC','Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+			}
+			.container{
+				width: 100%;
+				max-width: 768px;
+				margin: 0 auto;
+			}
+			header{
+				padding: 10px;
+				font-size: 1.6rem;
+				font-weight: bold;
+				background-color: rgb(226, 239, 218);
+				color: rgb(131, 60, 12);
+			}
+			main{
+				padding: 0 10px;
+			}
+			section{
+				margin-bottom: 10px;
+				line-height: 1.5;
+				color: #333;
+			}
+			section h2{
+				font-size: 1.8rem;
+				text-align: left;
+			}
+			.desc{
+				margin: 20px 0;
+			}
+			.form-group{
+				margin: 5px 0;
+				display: flex;
+			}
+			.form-group label, p{
+				font-size: 1.8rem;
+				flex: 0 0 40%;
+				text-align: right;
+				padding-right: 10px;
+			}
+			.form-group input{
+				width: 100%;
+				font-size: 1.8rem;
+				text-align: left;
+				-webkit-appearance: none;
+				border: none;
+				border-bottom: 1px solid #333;
+				outline: none;
+				padding: 0 10px;
+			}
+			.userinfo{
+				text-align: center;
+				margin-bottom: 20px;
+			}
+			section.result *{
+				font-size: 2.4rem;
+			}
+			p.result{
+				padding-left: 10px;
+				text-align: left;
+				font-weight: bold;
+				color: #f00;
+			}
+			button{
+				flex: 0 0 calc(50% - 20px);
+				-webkit-appearance: none;
+				display: inline-block;
+				margin: 20px 0 0 0;
+				color: #fff;
+			    background-color: #0d6efd;
+			    border-color: #0d6efd;
+    			line-height: 1.5;
+    			text-align: center;
+    			cursor: pointer;
+    			border: 1px solid transparent;
+				outline: none;
+			    padding: 5px 0;
+    			font-size: 2.4rem;
+    			font-weight: bold;
+    			border-radius: 1.5rem;
+    			transition: color .15s
+			}
+			button:hover{
+				color: #fff;
+			    background-color: #0a58ca;
+			    border-color: #0a53be;
+			}
+			button:focus{
+			    color: #fff;
+			    background-color: #0b5ed7;
+			    border-color: #0a58ca;
+			    box-shadow: 0 0 0 0.25rem rgb(49 132 253 / 50%);
+			}
+			nav{
+				display: flex;
+			}
+			.navitem{
+				flex: 0 0 50%;
+				text-align: center;
+				cursor: pointer;
+				font-size: 2.2rem;
+				padding: 10px 0;
+				background-color: rgb(169, 208, 142);
+				outline: 2px solid rgb(226, 239, 218);
+			}
+			.navitem.active{
+				background-color: #fff;
+				outline: none;
+			}
+			.button-group{
+				display: flex;
+				justify-content: space-around;
+			}
+			button[type='reset']{
+				color: #000;
+			    background-color: #ffc107;
+			    border-color: #ffc107;
+			}
+			button[type='reset']:hover{
+			    color: #000;
+    			background-color: #ffca2c;
+    			border-color: #ffc720;
+    		}
+    		button[type='reset']:focus{
+    			color: #000;
+			    background-color: #ffca2c;
+			    border-color: #ffc720;
+			    box-shadow: 0 0 0 0.25rem rgb(217 164 6 / 50%);
+			}
+			.result table{
+				caption-side: bottom;
+    			border-collapse: collapse;
+			    width: 100%;
+			    margin-bottom: 1rem;
+			    color: #212529;
+			    vertical-align: top;
+			    border-color: #dee2e6;
+			}
+			.result table th{
+				padding: 5px 0;
+				border-bottom: 1px solid #212529;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<h1>Aquacode 濃縮液稀釋公式</h1>
+			</header>
+
+			<nav>
+				<div class="navitem active" data-target="manualbox">單個TDS</div>
+				<div class="navitem" data-target="fixedbox">多個TDS</div>
+			</nav>
+
+			<main>
+				<form id="manualbox">
+					<section class="desc">
+						<h2>本表格由 Quartet Kaffe 設計，取本表格計算之濃縮液提取量，再兌純水到目標沖煮量即可得到目標TDS之沖煮用水。</h2>	
+					</section>
+					
+
+					<section class="userinfo">
+						<h2>請輸入下列數值</h2>
+						<div class="form-group">
+							<label for="tds">濃縮液TDS</label>
+							<input type="tel" id="tds" name="tds" required maxlength="3">
+						</div>
+
+
+						<div class="form-group">
+							<label for="tdstarget">目標TDS</label>
+							<input type="tel" id="tdstarget" name="tdstarget" required maxlength="3">
+						</div>
+
+
+						<div class="form-group">
+							<label for="water">沖煮水總量</label>
+							<input type="tel" id="water" name="water" required maxlength="3">
+						</div>
+
+						<div class="button-group">
+							<button type='reset'>清除</button>
+							<button id="calcmanualResult">送出</button>
+						</div>
+					</section>
+					
+
+					<section class="result">
+						<div class="form-group">
+							<p>濃縮液提取量</p>
+							<p id="tdsresult" class="result"></p>
+						</div>
+
+
+						<div class="form-group">
+							<p>純水提取量</p>
+							<p id="waterresult" class="result"></p>
+						</div>
+					</section>
+				</form>
+
+				<form id="fixedbox">
+					<section class="desc">
+						<h2>本表格由 Quartet Kaffe 設計，輸入需求水量及TDS濃縮濃度即可列出不同TDS對應的純水及濃縮液</h2>	
+					</section>
+
+					<section class="userinfo">
+						<h2>請輸入下列數值</h2>
+						<div class="form-group">
+							<label for="tdsrequest">需求水量</label>
+							<input type="tel" id="tdsrequest" name="tdsrequest" required maxlength="3">
+						</div>
+
+
+						<div class="form-group">
+							<label for="tdscompress">濃縮液TDS</label>
+							<input type="tel" id="tdscompress" name="tdscompress" required maxlength="3">
+						</div>
+
+						<div class="button-group">
+							<button type='reset'>清除</button>
+							<button id="calcfixedResult">送出</button>
+						</div>
+						
+					</section>
+
+
+					<section class="result">
+						<table id="tdsfixedtable">
+							<tr>
+								<th>TDS</th>
+								<th>濃縮液提取量</th>
+								<th>純水提取量</th>
+							</tr>
+						</table>
+					</section>
+				</form>
+				
+			</main>
+		</div>
+
+		<script>
+			function navChange() {
+				let targetElemID = this.getAttribute('data-target');
+				let naviemElems = document.getElementsByClassName('navitem');
+				let manualboxElem = document.getElementById('manualbox');
+				let fixedboxElem = document.getElementById('fixedbox');
+				if (targetElemID === "manualbox"){
+					naviemElems[0].classList.add('active');
+					manualboxElem.style.display = 'block';
+					naviemElems[1].classList.remove('active');
+					fixedboxElem.style.display = 'none';
+				} else {
+					naviemElems[0].classList.remove('active');
+					manualboxElem.style.display = 'none';
+					naviemElems[1].classList.add('active');
+					fixedboxElem.style.display = 'block';
+				}
+			}
+
+			document.getElementById('fixedbox').style.display = 'none';
+
+			let navitemElems = document.getElementsByClassName("navitem");
+
+			Array.from(navitemElems).forEach(function(element) {
+		      element.addEventListener('click', navChange);
+		    });
+
+
+			function calcmanualResult() {
+			  	let tdsValue = parseInt(document.getElementById('tds').value); 
+				let tdstargetValue = parseInt(document.getElementById('tdstarget').value);
+			  	let waterValue = parseInt(document.getElementById('water').value);
+
+			  	if (tdsValue > 0 && tdstargetValue > 0 && waterValue > 0) {
+			  		console.log(tdsValue, tdstargetValue, waterValue);	
+			  		let calcResultArray = calcResult(tdsValue, tdstargetValue, waterValue)
+			  		let tdsresultValue = calcResultArray[0];
+			  		let waterresultValue = calcResultArray[1];
+
+				  	document.getElementById('tdsresult').innerText = Math.round(tdsresultValue * 10, -1)/10;
+					document.getElementById('waterresult').innerText = Math.round(waterresultValue * 10, -1)/10;
+			  	} else {
+					alert('3個數值尚未輸入!!')			  		
+			  	}
+			}
+
+			function calcfixedResult() {
+
+			}
+
+			function calcResult(tdsValue, tdstargetValue, waterValue) {
+				let tdsresultValue = (parseInt(tdstargetValue) * parseInt(waterValue)) / parseInt(tdsValue);
+				let waterresultValue = parseFloat(waterValue) - parseFloat(tdsresultValue);
+				return [tdsresultValue, waterresultValue];
+			}
+
+			let buttonManual = document.getElementById('calcmanualResult');
+			buttonManual.addEventListener('click', calcmanualResult, false);
+
+			let buttonFixed = document.getElementById('calcfixedResult');
+			buttonFixed.addEventListener('click', calcfixedResult, false);
+
+		</script>
+		
+	</body>
+</html>
