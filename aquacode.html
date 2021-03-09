@@ -37,6 +37,18 @@
 				background-color: rgb(226, 239, 218);
 				color: rgb(131, 60, 12);
 			}
+			header h1{
+				display: inline-block;
+			}
+			header .shopeelink img{
+				height: 40px;
+				float: right;
+			}
+			header::after{
+				content: '';
+				clear: both;
+				display: block;
+			}
 			main{
 				padding: 0 10px;
 			}
@@ -63,12 +75,11 @@
 				text-align: right;
 				padding-right: 10px;
 			}
-			.form-group input{
+			.form-group input,
+			.form-group select{
 				width: 100%;
-				flex: 0 0 calc(60% - 40px);
 				font-size: 1.8rem;
 				text-align: left;
-				-webkit-appearance: none;
 				border: 1px solid #ced4da;
 				border-radius: .25rem;
 				outline: none;
@@ -80,6 +91,13 @@
 			    border-color: #86b7fe;
 			    outline: 0;
 			    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+			}
+			.form-group input{
+				-webkit-appearance: none;
+				flex: 0 0 calc(60% - 40px);
+			}
+			.form-group select{
+				flex: 0 0 calc(60% - 20px);
 			}
 			.form-group .detail{
 				flex: 0 0 100%;
@@ -199,6 +217,7 @@
 		<div class="container">
 			<header>
 				<h1>Aquacode 濃縮液稀釋公式</h1>
+				<a href="https://shopee.tw/shop/76888890/" target="_blank" title="QK蝦皮" class="shopeelink"><img src="shopeeicon.png"></a>
 			</header>
 
 			<nav>
@@ -216,7 +235,35 @@
 					<section class="userinfo">
 						<h2>請輸入下列數值</h2>
 						<div class="form-group">
-							<label for="tds">濃縮液TDS</label>
+							<label for="tdssize">濃縮液的容量</label>
+							<select id="tdssize">
+								<option value="0" disabled selected="">請選擇</option>	
+								<option value="590">1L</option>
+								<option value="393">1.5L</option>
+								<option value="295">2L</option>
+								<option value="197">3L</option>
+								<option value="148">4L</option>
+								<option value="131">4.5L</option>
+								<option value="118">5L</option>
+								<option value="98">6L</option>
+								<option value="85">7L</option>
+								<option value="74">8L</option>
+								<option value="66">9L</option>
+								<option value="59">10L</option>
+								<option value="54">11L</option>
+								<option value="49">12L</option>
+								<option value="45">13L</option>
+								<option value="42">14L</option>
+								<option value="39">15L</option>
+								<option value="37">16L</option>
+								<option value="35">17L</option>
+								<option value="33">18L</option>
+								<option value="31">19L</option>
+								<option value="30">20L</option>
+							</select>	
+						</div>
+						<div class="form-group">
+							<label for="tds">濃縮液對應的TDS</label>
 							<input type="tel" id="tds" name="tds" required maxlength="3" autocomplete="off">
 							<p class="detail">* 已倒入Aquacode的濃縮液桶水對應的TDS</p>
 						</div>
@@ -269,6 +316,36 @@
 
 
 						<div class="form-group">
+							<label for="tdssizecompress">濃縮液的容量</label>
+							<select id="tdssizecompress">
+								<option value="0" disabled selected="">請選擇</option>	
+								<option value="590">1L</option>
+								<option value="393">1.5L</option>
+								<option value="295">2L</option>
+								<option value="197">3L</option>
+								<option value="148">4L</option>
+								<option value="131">4.5L</option>
+								<option value="118">5L</option>
+								<option value="98">6L</option>
+								<option value="85">7L</option>
+								<option value="74">8L</option>
+								<option value="66">9L</option>
+								<option value="59">10L</option>
+								<option value="54">11L</option>
+								<option value="49">12L</option>
+								<option value="45">13L</option>
+								<option value="42">14L</option>
+								<option value="39">15L</option>
+								<option value="37">16L</option>
+								<option value="35">17L</option>
+								<option value="33">18L</option>
+								<option value="31">19L</option>
+								<option value="30">20L</option>
+							</select>	
+						</div>
+
+
+						<div class="form-group">
 							<label for="tdscompress">濃縮液TDS</label>
 							<input type="tel" id="tdscompress" name="tdscompress" required maxlength="3" autocomplete="off">
 							<p class="detail">* 已倒入Aquacode的濃縮液桶水對應的TDS</p>
@@ -298,10 +375,10 @@
 
 		<script>
 			function navChange() {
-				let targetElemID = this.getAttribute('data-target');
-				let naviemElems = document.getElementsByClassName('navitem');
-				let manualboxElem = document.getElementById('manualbox');
-				let fixedboxElem = document.getElementById('fixedbox');
+				const targetElemID = this.getAttribute('data-target');
+				const naviemElems = document.getElementsByClassName('navitem');
+				const manualboxElem = document.getElementById('manualbox');
+				const fixedboxElem = document.getElementById('fixedbox');
 				if (targetElemID === "manualbox"){
 					naviemElems[0].classList.add('active');
 					manualboxElem.style.display = 'block';
@@ -317,7 +394,7 @@
 
 			document.getElementById('fixedbox').style.display = 'none';
 
-			let navitemElems = document.getElementsByClassName("navitem");
+			const navitemElems = document.getElementsByClassName("navitem");
 
 			Array.from(navitemElems).forEach(function(element) {
 		      element.addEventListener('click', navChange);
@@ -325,15 +402,15 @@
 
 
 			function calcmanualResult() {
-			  	let tdsValue = parseInt(document.getElementById('tds').value); 
-				let tdstargetValue = parseInt(document.getElementById('tdstarget').value);
-			  	let waterValue = parseInt(document.getElementById('water').value);
+			  	const tdsValue = parseInt(document.getElementById('tds').value); 
+				const tdstargetValue = parseInt(document.getElementById('tdstarget').value);
+			  	const waterValue = parseInt(document.getElementById('water').value);
 
 			  	if (tdsValue > 0 && tdstargetValue > 0 && waterValue > 0) {
 			  		// console.log(tdsValue, tdstargetValue, waterValue);	
-			  		let calcResultArray = calcResult(tdsValue, tdstargetValue, waterValue)
-			  		let tdsresultValue = calcResultArray[0];
-			  		let waterresultValue = calcResultArray[1];
+			  		const calcResultArray = calcResult(tdsValue, tdstargetValue, waterValue)
+			  		const tdsresultValue = calcResultArray[0];
+			  		const waterresultValue = calcResultArray[1];
 
 				  	document.getElementById('tdsresult').innerText = Math.round(tdsresultValue * 10, -1)/10;
 					document.getElementById('waterresult').innerText = Math.round(waterresultValue * 10, -1)/10;
@@ -343,13 +420,13 @@
 			}
 
 			function calcfixedResult() {
-				let waterrequestValue = parseInt(document.getElementById('waterrequest').value); 
-				let tdscompressValue = parseInt(document.getElementById('tdscompress').value);
+				const waterrequestValue = parseInt(document.getElementById('waterrequest').value); 
+				const tdscompressValue = parseInt(document.getElementById('tdscompress').value);
 
 				if (waterrequestValue > 0 && tdscompressValue > 0) {
 					let tdsfixedtable = document.getElementById('tdsfixedtable');
-					for (var i = 100; i > 0; i = i - 5) {
-						let calcResultArray = calcResult(tdscompressValue, i, waterrequestValue);
+					for (let i = 100; i > 0; i = i - 5) {
+						const calcResultArray = calcResult(tdscompressValue, i, waterrequestValue);
 						let tr = document.createElement('tr');
 						let tdTDS = document.createElement('td');
 						tdTDS.textContent = i;
@@ -368,17 +445,32 @@
 			}
 
 			function calcResult(tdsValue, tdstargetValue, waterValue) {
-				let tdsresultValue = (parseInt(tdstargetValue) * parseInt(waterValue)) / parseInt(tdsValue);
-				let waterresultValue = parseFloat(waterValue) - parseFloat(tdsresultValue);
+				const tdsresultValue = (parseInt(tdstargetValue) * parseInt(waterValue)) / parseInt(tdsValue);
+				const waterresultValue = parseFloat(waterValue) - parseFloat(tdsresultValue);
 				return [tdsresultValue, waterresultValue];
 			}
 
-			let buttonManual = document.getElementById('calcmanualResult');
+			const buttonManual = document.getElementById('calcmanualResult');
 			buttonManual.addEventListener('click', calcmanualResult, false);
 
-			let buttonFixed = document.getElementById('calcfixedResult');
+			const buttonFixed = document.getElementById('calcfixedResult');
 			buttonFixed.addEventListener('click', calcfixedResult, false);
 
+			function getTDSbySize(e) {
+				const tdssizeElem = document.getElementById(e.target.id);
+				let tdsElem = document.getElementById('tds');
+				if (e.target.id === 'tdssizecompress') {
+					tdsElem = document.getElementById('tdscompress');	
+				}
+				const tdssizeValue = tdssizeElem.value;
+				tdsElem.value = tdssizeValue;
+			}
+			
+			const tdssizeElem = document.getElementById('tdssize');
+			tdssizeElem.addEventListener('change', getTDSbySize, false);
+
+			const tdssizecompressElem = document.getElementById('tdssizecompress');
+			tdssizecompressElem.addEventListener('change', getTDSbySize, false);
 		</script>
 		
 	</body>
